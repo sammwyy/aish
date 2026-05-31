@@ -1,0 +1,38 @@
+spec_version: "0.1.0"
+name: aish
+version: 0.1.0
+description: >
+  AISH (AI Shell) is an intelligent, security-first command-line assistant written in Rust.
+  It accepts natural language requests and translates them into shell commands and file operations,
+  executing them interactively with per-operation approval prompts. AISH auto-detects workspace
+  context (languages, frameworks, CI/CD, cloud providers) to give accurate, contextual suggestions.
+  Supports OpenAI, OpenRouter, and any OpenAI-compatible LLM provider. Features granular operation
+  permissions, path validation, extension blocking, and an interactive conversation mode.
+license: MIT
+model:
+  preferred: openai:gpt-4
+  compatible:
+    - openai:gpt-4o
+    - openai:gpt-3.5-turbo
+    - openrouter:auto
+runtime:
+  max_turns: 50
+  environment:
+    - name: OPENAI_API_KEY
+      description: API key for the configured LLM provider
+      required: true
+skills:
+  - name: execute_shell
+    description: Execute shell commands and return their output
+  - name: fs_readfile
+    description: Read the contents of a file
+  - name: fs_writefile
+    description: Write content to a file
+  - name: fs_makedir
+    description: Create a directory
+  - name: fs_listdir
+    description: List contents of a directory
+compliance:
+  risk_tier: standard
+  supervision:
+    human_in_the_loop: destructive
